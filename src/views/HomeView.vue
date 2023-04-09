@@ -1,32 +1,24 @@
 <template>
   <div class="home">
-  
-   
-    <SinglePost :post="post" />
-    
-    
-
+    <div v-for="post in posts" :key="post.id">
+      <SinglePost :post="post"></SinglePost>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
-import SinglePost from '../components/SinglePost.vue';
-import getPosts from '../composables/getPosts.js';
-import { ref } from 'vue';
-
+import { ref } from "vue";
+import SinglePost from "../components/SinglePost.vue";
+import getPosts from "../composables/getPosts";
 export default {
-  name: 'HomeView',
-  components: {SinglePost},
-    setup(){
-      const posts = ref([])
-      const {data} = getPosts();
+  name: "Home",
+  components: { SinglePost },
+  setup() {
+    const posts = ref([]);
+    getPosts().then((data) => {
       posts.value = data;
-      console.log(posts)
-      
-    }
- 
+    });
+    return { posts };
+  },
 };
-
 </script>
