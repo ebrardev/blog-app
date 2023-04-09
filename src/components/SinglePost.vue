@@ -16,29 +16,29 @@
   </script>
   
   <style>
-  .post {
+ .post{
     margin: 20px auto;
-    background: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
-    box-shadow: 1px 2px 3px rgba(0, 0, 0, 0.05);
-    border-left: 4px solid #ff5500;
-  }
-  h3 {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19);
+    border: 1px solid #eee;
+    box-sizing: border-box;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
-  }
-  .actions {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .material-icons {
-    font-size: 24px;
-    margin-left: 10px;
-    color: #bbb;
+    border-left: 4px solid purple;
+    border-right:  4px solid black ;
+}
+h3{
+    font-size: 20px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: center;
+    color: #333;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
-  }
-  .material-icons:hover {
-    color: #777;
-  }
+}
+
+
+
   </style>

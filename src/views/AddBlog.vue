@@ -1,98 +1,83 @@
 <template>
-  <form>
-    <label> Title:</label>
+  <form @submit.prevent="handleSubmit">
+    <label>Title:</label>
     <input type="text" v-model="title" required />
-    <label> Content:</label>
+    <label>Content:</label>
     <textarea v-model="content" required></textarea>
-    <button >Add Post</button>
+    <button>Add Post</button>
   </form>
 </template>
 
 <script>
+import { ref } from "vue";
+import { addDoc, collection, getFirestore } from "firebase/firestore/lite";
+import { fb } from "../firebase/config";
+import { useRouter } from "vue-router";
 export default {
-  data(){
-    return {
-      title: '',
-      content: ''
+  setup() {
+    const title = ref("");
+    const content = ref("");
+    const id = Date.now();
+    const router = useRouter();
+    function handleSubmit() {
+      const post = {
+        title: title.value,
+        content: content.value,
+        id: id,
+      };
+      const db = getFirestore(fb);
+      const fbRef = collection(db, "posts");
+      addDoc(fbRef, post);
+      router.push({
+        name: "Home",
+      });
     }
-  }
-
-}
+    return { title, content, handleSubmit };
+  },
+};
 </script>
 
 <style>
 form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 50px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  margin-top: 20px;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
 }
-label{
-  margin-bottom: 10px;
-  font-size: 16px;
+label {
+  display: block;
+  color: #bbb;
+  text-transform: uppercase;
+  font-size: 14px;
   font-weight: bold;
-  color: #b3b2b2;
-  text-align: left;
-  /* text-transform: uppercase; */
   letter-spacing: 1px;
-  line-height: 24px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
- 
+  margin: 20px 0 10px 0;
 }
 input {
   padding: 10px;
   border: 0;
-  border-bottom: 2px solid green;
+  border-bottom: 2px solid #ddd;
   width: 100%;
   box-sizing: border-box;
-  outline: none;
 }
-textarea{
-  border: 2px solid green;
+textarea {
+  border: 2px solid #ddd;
   padding: 10px;
   width: 100%;
   box-sizing: border-box;
   height: 100px;
-  outline: none;
 }
-button{
-  border-radius: 5px;
+form button {
+  display: block;
+  margin: 20px auto 0;
+  background: #019403;
+  color: #fff;
   padding: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
-  margin-bottom: 10px;
+  border: 0;
+  border-radius: 7px;
   font-size: 16px;
-  font-weight: bold;
-  color: white;
-  text-align: left;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  line-height: 24px;
-  cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  background-color: #333;
-  border: 1px solid #333;
-  border-radius: 4px;
-  outline: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
- 
-}
-button:hover{
-  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.22);
-  transition: all 0.3s ease-in-out;
-  background-color: #620ab5;
 }
 
+form button:hover {
+  background: #26039a;
+}
 </style>
