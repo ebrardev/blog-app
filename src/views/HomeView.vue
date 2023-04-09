@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <h1> blog app</h1>
+    
+    <h1>This is an home page</h1>
   </div>
 </template>
 
@@ -11,6 +12,7 @@
 export default {
   name: 'HomeView',
   components: {
+    
     
   }
 }
