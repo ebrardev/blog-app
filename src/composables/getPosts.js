@@ -1,7 +1,7 @@
 import {ref} from 'vue'
 import {fb} from '../firebase/config'
 import {async} from "@firebase/util"
-import {collection, getFirestore} from "firebase/firestore/lite"
+import {collection, getDocs,getFirestore} from "firebase/firestore/lite"
 
 
 const getPosts = async () =>{
